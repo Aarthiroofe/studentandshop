@@ -1,0 +1,175 @@
+<div class="content-wrapper">
+    <div class="add_group">
+        <div class="heading">
+            <h3>Product details</h3>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Product list</h3>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Add
+                                product</button>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Product name</th>
+                                    <th>Product group</th>
+                                    <th>Stock</th>
+                                    <th>MRP</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let product of productdetails.slice((page - 1) * pageSize, page * pageSize)">
+                                <tr>
+                                    <td>{{product.productname}}</td>
+                                    <td>{{product.productgroup}}</td>
+                                    <td>{{product.stock}}</td>
+                                    <td>{{product.Mrp}}Rs</td>
+                                    <td>
+                                        <div class="action_icons">
+                                            <button data-toggle="modal" data-target="#modal-default3"
+                                                class="btn btn-block btn-secondary btn-sm same_butons"
+                                                (click)="editdetails(product)">
+                                                Edit
+                                            </button>
+                                            <button data-toggle="modal" data-target="#modal-default2"
+                                                class="btn btn-block btn-danger btn-sm same_butons"
+                                                (click)="deletedproduct(product)">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <div class="pagination">
+                                    <button class="btn btn-info" (click)="prevPage()"
+                                        [disabled]="page === 1">prev</button>
+                                    <ul class="paginator_list">
+                                        <li *ngFor="let p of pages" [ngClass]="{ active: p === page }">
+                                            <button class="btn btn-outline-primary" (click)="goToPage(p)">{{p}}</button>
+
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-info" (click)="nextPage()"
+                                        [disabled]="page === totalPages ">next</button>
+                                </div>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4> Add product </h4>
+                </div>
+                <div class="modal-body">
+                    <div [formGroup]="Addproduct">
+                        <div class="form-group">
+                            <label>Product name</label>
+                            <input type="text" class="form-control" formControlName="productname"
+                                placeholder="Enter product name">
+                        </div>
+                        <div class="form-group">
+                            <label>Product group</label>
+                            <select class="form-control " formControlName="productgroup">
+                                <option *ngFor="let product of productgroup" [value]="product.gropname">
+                                    {{product.gropname}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Stock</label>
+                            <input type="number" class="form-control" formControlName="stock" placeholder="ex:123">
+                        </div>
+                        <div class="form-group">
+                            <label>MRP</label>
+                            <input type="text" class="form-control" formControlName="Mrp" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-default" (click)="addproductcancel()"
+                        data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="addproductname()"
+                        data-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="alert" [class.visible]="isVisible">
+    {{message}}
+</div>
+<!-- delete name -->
+<div class="modal fade" id="modal-default2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+            </div> -->
+            <div class="modal-body">
+                <h4> Are you sure you want to delete?
+                </h4>
+
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" (click)="deleteproduct()" data-dismiss="modal">yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- editname -->
+<div class="modal fade" id="modal-default3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4> Edit product group</h4>
+            </div>
+            <div class="modal-body">
+                <div [formGroup]="editproduct">
+                    <div class="form-group">
+                        <label>Product name</label>
+                        <input type="text" class="form-control" formControlName="editproductname"
+                            placeholder="Enter product name">
+                    </div>
+                    <div class="form-group">
+                        <label>Product group</label>
+                        <select class="form-control " formControlName="editproductgroup">
+                            <option *ngFor="let product of productgroup" [value]="product.gropname">
+                                {{product.gropname}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock</label>
+                        <input type="number" class="form-control" formControlName="editstock" placeholder="ex:123">
+                    </div>
+                    <div class="form-group">
+                        <label>MRP</label>
+                        <input type="text" class="form-control" formControlName="editMrp" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="editproductname()"
+                    data-dismiss="modal">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

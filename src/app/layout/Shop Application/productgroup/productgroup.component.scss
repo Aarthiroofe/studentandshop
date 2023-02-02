@@ -1,0 +1,62 @@
+.heading {
+  padding: 2% 0%;
+}
+.add_group {
+  margin: 0% 1%;
+}
+.alert {
+  position: fixed;
+  top: 5rem;
+  right: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  padding: 2rem;
+  background: #fff;
+  color: green;
+  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(1.25rem);
+}
+.action_icons {
+  display: flex;
+}
+.card-body {
+  width: 60%;
+  margin: 0% 20%;
+}
+.table {
+  margin: 2% 0%;
+}
+.same_butons {
+  margin: 0px 5px;
+  width: 70px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+
+  button {
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+.paginator_list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0px;
+  padding: 0px 20px;
+}
+.paginator_list li {
+  padding: 0px 5px;
+}

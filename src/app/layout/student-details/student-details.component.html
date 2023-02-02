@@ -1,0 +1,126 @@
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Waiting List</h3>
+
+                        </div>
+
+                        <div class="card-body">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-primary" (click)="generateExcel()">Download as Excel</button>
+                            </div>
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Full Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Date Of Birth</th>
+                                        <th>Marks Obtained</th>
+                                        <th>Percentage</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    *ngFor="let student of Waitingstudents.slice((page - 1) * pageSize, page * pageSize)">
+                                    <tr>
+                                        <td>{{student.fullName}}</td>
+                                        <td>{{student.email}}</td>
+                                        <td>{{student.phone}}
+                                        </td>
+                                        <td>{{student.dob}}</td>
+                                        <td>{{student.marksObtained}}</td>
+                                        <td>{{(student.marksObtained/600)*100}}%</td>
+                                        <td>
+                                            <ul class="action_icons">
+                                                <li>
+                                                    <button class="btn btn-block btn-secondary btn-sm"
+                                                        (click)="addStudent(student.id)">
+                                                        Confirm
+                                                    </button>
+                                                </li>
+                                                <li data-toggle="modal" data-target="#modal-default">
+                                                    <button class="btn btn-block btn-danger btn-sm"
+                                                        (click)="deleteStudent(student)">
+                                                        Cancel
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <div class="pagination">
+                                        <button class="btn btn-info" (click)="prevPage()"
+                                            [disabled]="page === 1">prev</button>
+                                        <ul class="paginator_list">
+                                            <li *ngFor="let p of pages" [ngClass]="{ active: p === page }">
+                                                <button class="btn btn-outline-primary"
+                                                    (click)="goToPage(p)">{{p}}</button>
+
+                                            </li>
+                                        </ul>
+                                        <button class="btn btn-info" (click)="nextPage()"
+                                            [disabled]="page === totalPages ">next</button>
+                                    </div>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div>
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Hi {{dialogue.fullName}}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Why Do you Cancel Application&hellip;
+
+                        </p>
+                        <div class="form-group" [formGroup]="cancelstudent">
+                            <label for="reason">Please Give the Reason &hellip;</label>
+                            <div class="col-sm-10">
+                                <input type="Text" class="form-control" id="reason" placeholder=""
+                                    formControlName="cancelreason">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" (click)="deletedetails()" data-dismiss="modal"
+                            class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="alert" [class.visible]="isVisible">
+        {{message}}
+    </div>
+
+</div>

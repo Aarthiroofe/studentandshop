@@ -1,0 +1,23 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+
+  button {
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+.paginator_list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0px;
+  padding: 0px 20px;
+}
+.paginator_list li {
+  padding: 0px 5px;
+}

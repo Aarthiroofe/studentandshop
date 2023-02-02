@@ -1,0 +1,127 @@
+<div class="content-wrapper">
+    <div class="addstudent">
+        <div>
+            <div class="heading">
+                <h3>Generate Gate ID</h3>
+            </div>
+            <div [formGroup]="AddStudent">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" formControlName="fullName">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" formControlName="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth:</label>
+                            <input type="date" class="form-control" formControlName="dob" formControlName="dob">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" formControlName="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fatherName">Father's Name</label>
+                            <input type="text" class="form-control" id="fatherName" name="fatherName"
+                                formControlName="fatherName">
+                        </div>
+                        <div class="form-group">
+                            <label for="motherName">Mother's Name</label>
+                            <input type="text" class="form-control" id="motherName" name="motherName"
+                                formControlName="motherName">
+                        </div>
+                        <div class="form-group">
+                            <label>Chooe Your Image For ID Card</label>
+                            <input #uploadFile (change)="onselectFile($event)" type='file' />
+                        </div>
+                        <div>
+                            <button (click)="cameraon()" class="btn btn-primary">Take a photo</button>
+                        </div>
+                        <div *ngIf="cameraenable">
+                            <webcam [height]="150" [width]="150" [trigger]="triggerObservable"
+                                (imageCapture)="handleImage($event)">
+                            </webcam>
+                            <button class="actionBtn btn btn-primary" (click)="triggerSnapshot();">
+                                Click Here and take the Shot</button>
+                        </div>
+                        <div><img [src]="url" class="idimage"></div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+
+
+
+                        <div class="form-group">
+                            <label for="board">Board of examination</label>
+                            <select class="form-control" name="board" formControlName="boardOfExamination">
+                                <option value="CBSE">CBSE</option>
+                                <option value="ICSE">ICSE</option>
+                                <option value="State">State</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="stream">Stream</label>
+                            <select formControlName="stream" class="form-control" id="stream" name="stream">
+                                <option value="science">Science</option>
+                                <option value="commerce">Commerce</option>
+                                <option value="arts">Arts</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="percentage">Percentage</label>
+                            <input type="number" class="form-control" id="percentage" name="percentage"
+                                formControlName="percentage">
+                        </div>
+                        <div class="form-group">
+                            <label for="marks">Marks obtained in 12th standard</label>
+                            <input type="number" class="form-control" id="marks" name="marks"
+                                formControlName="marksObtained">
+                        </div>
+                        <div class="form-group">
+                            <label for="year">Year of passing</label>
+                            <input type="number" class="form-control" id="year" name="year"
+                                formControlName="yearOfPassing">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Home Address</label>
+                            <textarea type="text" class="form-control" id="address" name="address"
+                                formControlName="homeAddress"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <button type="submit" (click)="submit()" class="btn btn-primary" data-toggle="modal"
+                        data-target="#modal-default">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="alert" [class.visible]="isVisible">
+            {{message}}
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h4>Hi {{body.fullName}} Print to get your temporary ID card&hellip;
+                    </h4>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-default" (click)="idnoprint()" data-dismiss="modal">NO</button>
+                    <button type="button" data-dismiss="modal" (click)="printIDCard()"
+                        class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>

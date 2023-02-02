@@ -1,0 +1,107 @@
+<div class="content-wrapper">
+    <div class="header">
+        <h3>Welcome to ABC University</h3>
+    </div>
+    <div class="body">
+        <h5>Hi {{newdata.fullName}} Please Select the below Informations</h5>
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 details">
+
+                <div class="form-group" [formGroup]="feeForm">
+                    <div>
+                        <form [formGroup]="feeForm">
+                            <div>
+                                <p>Please select your Admission Quota:</p>
+                                  <input type="radio" id="governmentquota" name="clgquota" value="governmentquota"
+                                    (click)="changeValue('governmentquota')">
+                                  <label for="governmentquota">Government Quota</label><br>
+                                  <input type="radio" id="collegemanagement" name="clgquota" value="collegemanagement"
+                                    (click)="changeValue('collegemanagement')">
+                                  <label for="collegemanagement">College Management</label><br>
+                            </div>
+                            <div>
+                                <p>Please select your Admission Quota:</p>
+                                  <input type="radio" id="dayscholar" name="where" value="dayscholar"
+                                    (click)="changeValue('dayscholar')">
+                                  <label for="dayscholar">Dayscholar</label><br>
+                                  <input type="radio" id="Hosteler" name="where" value="Hosteler"
+                                    (click)="changeValue('hosteler')">
+                                  <label for="Hosteler">Hosteler</label><br>
+                            </div>
+                            <div *ngIf="dayscholarshow">
+                                <p>Please select your Bus:</p>
+                                  <input type="radio" id="collegebus" name="bus" value="collegebus"
+                                    (click)="changeValue('collegebus')">
+                                  <label for="collegebus">College Bus</label><br>
+                                  <input type="radio" id="outbus" name="bus" value="outbus"
+                                    (click)="changeValue('outbus')">
+                                  <label for="outbus">Outbus</label><br>
+                            </div>
+                            <div *ngIf="collegebusshow" class="form-horizontal">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Bus Number:</label>
+                                    <div class="col-sm-9    ">
+                                        <input type="text" class="form-control" placeholder="" formControlName="Busno">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-3 col-form-label">City:</label>
+                                    <div class="col-sm-9    ">
+                                        <input type="text" class="form-control" placeholder="" formControlName="city">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
+                <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Fees Name</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="feesStructure.Governmentquota > 0">
+                                <td>Tution Fees</td>
+                                <td>{{feesStructure.Governmentquota}}</td>
+                            </tr>
+                            <tr *ngIf="feesStructure.Collegemanagement > 0">
+                                <td>Tution Fees</td>
+                                <td>{{feesStructure.Collegemanagement}}</td>
+                            </tr>
+                            <tr *ngIf="feesStructure.Busfees > 0">
+                                <td>Bus Fees</td>
+                                <td>{{feesStructure.Busfees}}</td>
+                            </tr>
+                            <tr *ngIf="feesStructure.dayscholar > 0">
+                                <td>Dayscholar</td>
+                                <td>{{feesStructure.dayscholar}}</td>
+                            </tr>
+                            <tr *ngIf="feesStructure.Hosteler > 0">
+                                <td>Hosteler</td>
+                                <td>{{feesStructure.Hosteler}}</td>
+                            </tr>
+                            <tr *ngIf="feesStructure.Totalfees > 0">
+                                <td>Total Fees</td>
+                                <td>{{feesStructure.Totalfees}}</td>
+                            </tr>
+                            <tr *ngIf="feesStructure.Totalfees == ''">
+                                <td colspan="2">Please Select the Fees</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <h5>All the Fees Amount Read Carefully after you click to confirm Your Seat &nbsp; <button
+                (click)="Savetoconfirm()" class="btn btn-success">Submit</button></h5>
+
+    </div>
+    <div class="alert" [class.visible]="isVisible">
+        {{message}}
+    </div>
+</div>

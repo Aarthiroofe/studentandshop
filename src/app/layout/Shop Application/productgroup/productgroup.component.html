@@ -1,0 +1,139 @@
+<div class="content-wrapper">
+    <div class="add_group">
+        <div class="heading">
+            <h3>Add product Group</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Product group list</h3>
+
+                    </div>
+
+                    <div class="card-body">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Add
+                                group</button>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover">
+
+                            <thead>
+                                <tr>
+                                    <th>Product group</th>
+                                    <th style="width: 26%;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let product of productgroup.slice((page - 1) * pageSize, page * pageSize)">
+                                <tr>
+                                    <td>{{product.gropname}}</td>
+                                    <td>
+                                        <div class="action_icons">
+                                            <button data-toggle="modal" data-target="#modal-default3"
+                                                class="btn btn-block btn-secondary btn-sm same_butons"
+                                                (click)="editdialogue(product)">
+                                                Edit
+                                            </button>
+                                            <button data-toggle="modal" data-target="#modal-default2"
+                                                class="btn btn-block btn-danger btn-sm same_butons"
+                                                (click)="deletedialogue(product)">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <div class="pagination">
+                                    <button class="btn btn-info" (click)="prevPage()"
+                                        [disabled]="page === 1">prev</button>
+                                    <ul class="paginator_list">
+                                        <li *ngFor="let p of pages" [ngClass]="{ active: p === page }">
+                                            <button class="btn btn-outline-primary" (click)="goToPage(p)">{{p}}</button>
+
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-info" (click)="nextPage()"
+                                        [disabled]="page === totalPages ">next</button>
+                                </div>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert" [class.visible]="isVisible">
+    {{message}}
+</div>
+<!-- add name -->
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4> Add product group</h4>
+            </div>
+            <div class="modal-body">
+                <div [formGroup]="AddGroup">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" name="name" formControlName="Groupname"
+                            placeholder="Enter product group name">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-default" (click)="canceldialogue()"
+                    data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="addgroupname()"
+                    data-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- delete name -->
+<div class="modal fade" id="modal-default2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+            </div> -->
+            <div class="modal-body">
+                <h4> Are you sure you want to delete?
+                </h4>
+
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" (click)="deleteproduct()" data-dismiss="modal">yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- editname -->
+<div class="modal fade" id="modal-default3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4> Edit product group</h4>
+            </div>
+            <div class="modal-body">
+
+                <div [formGroup]="EditGroup">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" name="name" formControlName="replacename"
+                            placeholder="Enter product group name">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-default" data-dismiss="modal"
+                    (click)="editproductcancel()">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="editproductname()"
+                    data-dismiss="modal">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

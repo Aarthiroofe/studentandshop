@@ -1,0 +1,73 @@
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Conformed Students</h3>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary" (click)="generateExcel()">Download as Excel</button>
+                        </div>
+
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Full Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Date Of Birth</th>
+                                        <th>Marks Obtained</th>
+                                        <th>Percentage</th>
+                                        <th>Total Fees</th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    *ngFor="let student of Conformlist.slice((page - 1) * pageSize, page * pageSize)">
+                                    <tr>
+                                        <td>{{student.fullName}}</td>
+                                        <td>{{student.email}}</td>
+                                        <td>{{student.phone}}
+                                        </td>
+                                        <td>{{student.dob}}</td>
+                                        <td>{{student.marksObtained}}</td>
+                                        <td>{{(student.marksObtained/600)*100}}%</td>
+                                        <td>{{student.totalFees}}</td>
+
+
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <div class="pagination">
+                                        <button class="btn btn-info" (click)="prevPage()"
+                                            [disabled]="page === 1">prev</button>
+                                        <ul class="paginator_list">
+                                            <li *ngFor="let p of pages" [ngClass]="{ active: p === page }">
+                                                <button class="btn btn-outline-primary"
+                                                    (click)="goToPage(p)">{{p}}</button>
+
+                                            </li>
+                                        </ul>
+                                        <button class="btn btn-info" (click)="nextPage()"
+                                            [disabled]="page === totalPages ">next</button>
+                                    </div>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

@@ -1,0 +1,78 @@
+.addstudent {
+  width: 60%;
+  margin: 0% 20%;
+}
+.heading {
+  padding: 3% 0%;
+}
+
+.header {
+  text-align: center;
+  padding: 2%;
+}
+.body {
+  padding: 2%;
+}
+.details {
+  padding: 2%;
+}
+
+p {
+  font-family: Lato;
+}
+
+.alert {
+  position: fixed;
+  top: 5rem;
+  right: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  padding: 2rem;
+  background: #fff;
+  color: #f65656;
+  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(1.25rem);
+}
+.idimage {
+  border-radius: 100px;
+  height: 100px;
+  width: 100px;
+}
+.row {
+  width: 100%;
+}
+.content {
+  border: 2px solid grey;
+  padding: 5% 5%;
+  background-image: url(../../../assets/img/idbackground.png);
+  border-radius: 20px;
+}
+.id_center {
+  text-align: center;
+}
+.left {
+  padding: 3%;
+}
+.idcarddiv {
+  padding-top: 7rem;
+}
+.idtable {
+  width: 100%;
+}
+
+.idcard {
+  text-align: center;
+  background-image: url(../../../assets/img/idbackground.png);
+  width: 60%;
+  margin: 0% 20%;
+}
+.print-table {
+  background-color: blue;
+  table-layout: fixed;
+}
